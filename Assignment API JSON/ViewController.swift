@@ -7,67 +7,106 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController,UISearchBarDelegate, UITableViewDelegate, UITableViewDataSource {
+    @IBOutlet weak var tableView: UITableView!
     
-    var fetchedLogin = [User]()
-
+    
+    
+var userData = [Items]()
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        parseData()
+        ParsingJson { data in
+            self.userData = data
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+        }
+        searchBar()
     }
-    func parseData(){
+    
+    func searchBar(){
+        let searchBar = UISearchBar(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 50))
+        searchBar.delegate = self
+        searchBar.showsScopeBar = true
+        searchBar.tintColor = UIColor.lightGray
+        //searchBar.scopeButtonTitles = ["User"]
+        self.tableView.tableHeaderView = searchBar
         
-        fetchedLogin = []
-        
-        let url = "https://api.github.com/search/users?q="
-        var request = URLRequest(url: URL(string: url)!)
-        request.httpMethod = "GET"
-        
-        
-        let configuration = URLSessionConfiguration.default
-        let session = URLSession(configuration: configuration, delegate: nil, delegateQueue: OperationQueue.main)
-        
-        let task = session.dataTask(with: request) { (data, response, error) in
-            
-            if (error != nil){
-                print("Error")
+    }
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchText == ""{
+            ParsingJson { data in
+                self.userData = data
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                }
             }
             else{
-                do{
-                    let fetchedData = try JSONSerialization.jsonObject(with: data!, options: .mutableLeaves) as! NSDictionary
-                    for eachFetchedLogin in fetchedData{
-                        let eachLogin = eachFetchedLogin
-                        let login = eachLogin["login"]
-                        let avatar_url = eachLogin["avatar_url"] as! String
-                        let url = eachLogin["url"] as! String
-                        let score = eachLogin["score"] as! String
-                        
-                        self.fetchedLogin.append(User(avatar_url: avatar_url, login: login, score: score, url: url))
-                    }
-                    print(fetchedData)
-                }
-                catch{
-                    print("Error 2")
+                if searchBar.selectedScopeButtonIndex == 0 {
+                    
+                }else{
+                    
                 }
             }
         }
-        task.resume()
     }
-
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 100
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return userData.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        
+        cell.textLabel?.text = userData[indexPath.row].login
+        cell.textLabel?.text = userData[indexPath.row].login
+        return cell
+    }
+    
+    
+    func ParsingJson(comletion: @escaping ([Items])->()){
+        let urlstring = "https://api.github.com/search/users?q=apurva"
+        //let y = searchBarSearchButtonClicked()
+        //let new = urlstring + y
+        let url = URL(string: urlstring)
+        
+        guard url != nil else{
+            print("Error")
+            return
+        }
+        let session = URLSession.shared
+        let dataTask = session.dataTask(with: url!) { data, response, error in
+    
+            if error == nil, data != nil{
+                let decoder = JSONDecoder()
+                do {
+                let ParsingData = try decoder.decode(Gitapi.self, from: data!)
+                    comletion(ParsingData.items)
+                }
+                catch {
+                    print("Parsing Error")
+                }
+            }
+        }
+        dataTask.resume()
+        
+    }
 }
 
-class User{
-    var avatar_url : String
+struct Gitapi : Decodable {
+    var total_count : Int
+    var items : [Items]
+    
+}
+struct Items : Decodable {
+    var avatar_url : URL
     var login : String
-    var score : String
-    var url : String
-    
-    init(avatar_url: String, login: String, score: String, url: String){
-        self.avatar_url = avatar_url
-        self.login = login
-        self.score = score
-        self.url = url
-    }
-    
+    var score : Int
+    var url : URL
 }
+
