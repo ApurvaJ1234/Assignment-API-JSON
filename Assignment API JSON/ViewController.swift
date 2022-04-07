@@ -10,46 +10,29 @@ import UIKit
 class ViewController: UIViewController,UISearchBarDelegate, UITableViewDelegate, UITableViewDataSource {
     @IBOutlet weak var tableView: UITableView!
     
+    var y : String?
+    @IBOutlet weak var searchBar: UISearchBar!
     
-    
+    //var new : String!
 var userData = [Items]()
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        
         ParsingJson { data in
             self.userData = data
             DispatchQueue.main.async {
                 self.tableView.reloadData()
             }
         }
-        searchBar()
-    }
-    
-    func searchBar(){
-        let searchBar = UISearchBar(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 50))
+      //  searchBar1()
         searchBar.delegate = self
-        searchBar.showsScopeBar = true
-        searchBar.tintColor = UIColor.lightGray
-        //searchBar.scopeButtonTitles = ["User"]
-        self.tableView.tableHeaderView = searchBar
         
     }
+    
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        if searchText == ""{
-            ParsingJson { data in
-                self.userData = data
-                DispatchQueue.main.async {
-                    self.tableView.reloadData()
-                }
-            }
-            else{
-                if searchBar.selectedScopeButtonIndex == 0 {
-                    
-                }else{
-                    
-                }
-            }
-        }
+        let y = searchBar.text!
+        print(y)
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -61,20 +44,35 @@ var userData = [Items]()
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         
-        cell.textLabel?.text = userData[indexPath.row].login
-        cell.textLabel?.text = userData[indexPath.row].login
+        
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "newTableCellCustom") as! newTableCellCustom
+        cell.label1login.text = userData[indexPath.row].login
+        
+        cell.label2score.text = "Score: "+String(userData[indexPath.row].score)
+        
+        
+        
+        let firstURL = userData[indexPath.row].avatar_url.absoluteString
+        
+        
+
+        let imageUrl = URL(string:firstURL )!
+
+        let imageData = try! Data(contentsOf: imageUrl)
+
+        let image = UIImage(data: imageData)
+
+        cell.imageavatar?.image = image
+        
         return cell
     }
     
     
     func ParsingJson(comletion: @escaping ([Items])->()){
         let urlstring = "https://api.github.com/search/users?q=apurva"
-        //let y = searchBarSearchButtonClicked()
-        //let new = urlstring + y
         let url = URL(string: urlstring)
-        
         guard url != nil else{
             print("Error")
             return

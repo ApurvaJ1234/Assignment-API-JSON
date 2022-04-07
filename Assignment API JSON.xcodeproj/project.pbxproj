@@ -16,6 +16,7 @@
 		1844FA9127FC590500B2C51E /* Assignment_API_JSONTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1844FA9027FC590500B2C51E /* Assignment_API_JSONTests.swift */; };
 		1844FA9B27FC590500B2C51E /* Assignment_API_JSONUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1844FA9A27FC590500B2C51E /* Assignment_API_JSONUITests.swift */; };
 		1844FA9D27FC590500B2C51E /* Assignment_API_JSONUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1844FA9C27FC590500B2C51E /* Assignment_API_JSONUITestsLaunchTests.swift */; };
+		18BE332027FEF06400D32662 /* newTableCellCustom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18BE331F27FEF06400D32662 /* newTableCellCustom.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +50,7 @@
 		1844FA9627FC590500B2C51E /* Assignment API JSONUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Assignment API JSONUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1844FA9A27FC590500B2C51E /* Assignment_API_JSONUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Assignment_API_JSONUITests.swift; sourceTree = "<group>"; };
 		1844FA9C27FC590500B2C51E /* Assignment_API_JSONUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Assignment_API_JSONUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		18BE331F27FEF06400D32662 /* newTableCellCustom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = newTableCellCustom.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +105,7 @@
 				1844FA7B27FC590300B2C51E /* SceneDelegate.swift */,
 				1844FA7D27FC590300B2C51E /* ViewController.swift */,
 				1844FA7F27FC590300B2C51E /* Main.storyboard */,
+				18BE331F27FEF06400D32662 /* newTableCellCustom.swift */,
 				1844FA8227FC590400B2C51E /* Assets.xcassets */,
 				1844FA8427FC590400B2C51E /* LaunchScreen.storyboard */,
 				1844FA8727FC590400B2C51E /* Info.plist */,
@@ -258,6 +261,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				18BE332027FEF06400D32662 /* newTableCellCustom.swift in Sources */,
 				1844FA7E27FC590300B2C51E /* ViewController.swift in Sources */,
 				1844FA7A27FC590300B2C51E /* AppDelegate.swift in Sources */,
 				1844FA7C27FC590300B2C51E /* SceneDelegate.swift in Sources */,
