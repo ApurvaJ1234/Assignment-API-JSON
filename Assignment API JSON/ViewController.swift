@@ -20,20 +20,22 @@ var userData = [Items]()
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
+        
+      //  searchBar1()
+        searchBar.delegate = self
+        
+    }
+    
+    
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        y = searchBar.text!
         ParsingJson { data in
             self.userData = data
             DispatchQueue.main.async {
                 self.tableView.reloadData()
             }
         }
-      //  searchBar1()
-        searchBar.delegate = self
-        
-    }
-    
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        let y = searchBar.text!
-        print(y)
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -72,7 +74,10 @@ var userData = [Items]()
     
     
     func ParsingJson(comletion: @escaping ([Items])->()){
-        let urlstring = "https://api.github.com/search/users?q=apurva"
+        print(y!)
+
+        let urlstring = "https://api.github.com/search/users?q=\(String(describing: y!))"
+        
         let url = URL(string: urlstring)
         guard url != nil else{
             print("Error")
