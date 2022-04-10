@@ -11,8 +11,7 @@ class newTableCellCustom: UITableViewCell {
     @IBOutlet weak var imageavatar: UIImageView!
     @IBOutlet weak var label1login: UILabel!
     @IBOutlet weak var label2score: UILabel!
-    @IBAction func viewDetailbutton(_ sender: UIButton) {
-    }
+   
     
     override func awakeFromNib() {
         super.awakeFromNib()
