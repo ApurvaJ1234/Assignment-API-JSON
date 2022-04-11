@@ -10,6 +10,10 @@ import UIKit
 class ViewController: UIViewController,UISearchBarDelegate, UITableViewDelegate, UITableViewDataSource {
     @IBOutlet weak var tableView: UITableView!
     
+    @IBAction func viewDetailFirst(_ sender: Any) {
+        let vc = userDetail()
+        navigationController?.pushViewController(vc, animated: true)
+    }
     
     var y : String?
     @IBOutlet weak var searchBar: UISearchBar!

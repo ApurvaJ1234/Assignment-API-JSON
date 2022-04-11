@@ -33,6 +33,9 @@
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <state key="normal" title="Button"/>
                                                     <buttonConfiguration key="configuration" style="plain" title="View Details"/>
+                                                    <connections>
+                                                        <segue destination="Zo5-Yb-cem" kind="presentation" id="bCv-bz-v0a"/>
+                                                    </connections>
                                                 </button>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hIz-a1-IOr">
                                                     <rect key="frame" x="26" y="15" width="59" height="59"/>
@@ -85,12 +88,12 @@
             </objects>
             <point key="canvasLocation" x="18.840579710144929" y="55.580357142857139"/>
         </scene>
-        <!--UserDetail-->
+        <!--User Detail-->
         <scene sceneID="7Ql-NR-QBW">
             <objects>
-                <viewController storyboardIdentifier="User_Detail" title="UserDetail" id="Zo5-Yb-cem" customClass="User_Detail" customModule="Assignment_API_JSON" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="det" id="Zo5-Yb-cem" customClass="userDetail" customModule="Assignment_API_JSON" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="qZz-od-wYp">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="If0-PJ-pAZ">
@@ -204,7 +207,14 @@
                         <viewLayoutGuide key="safeArea" id="Ner-vp-4CX"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
-                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics"/>
+                    <navigationItem key="navigationItem" id="5in-3u-QdZ"/>
+                    <nil key="simulatedTopBarMetrics"/>
+                    <connections>
+                        <outlet property="repoDesc" destination="Z8r-fc-3xA" id="lEL-Et-II8"/>
+                        <outlet property="repoName" destination="4OT-Ng-B5Z" id="4zy-uN-BXw"/>
+                        <outlet property="userImage" destination="If0-PJ-pAZ" id="dw0-jD-Q67"/>
+                        <outlet property="userName" destination="1DR-I7-qFC" id="Buw-hZ-szW"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5Lh-rA-GpG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
