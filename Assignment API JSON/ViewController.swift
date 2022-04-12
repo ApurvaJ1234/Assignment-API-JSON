@@ -11,10 +11,13 @@ class ViewController: UIViewController,UISearchBarDelegate, UITableViewDelegate,
     @IBOutlet weak var tableView: UITableView!
     
     @IBAction func viewDetailFirst(_ sender: Any) {
-        let vc = userDetail()
-        navigationController?.pushViewController(vc, animated: true)
+       // let det:userDetail=self.storyboard?.instantiateViewController(withIdentifier: "det") as!userDetail
+
+        
+      //  self.navigationController?.pushViewController(det, animated: true)
     }
     
+   var newlogin : String?
     var y : String?
     @IBOutlet weak var searchBar: UISearchBar!
     
@@ -56,7 +59,7 @@ class ViewController: UIViewController,UISearchBarDelegate, UITableViewDelegate,
             
             let cell = tableView.dequeueReusableCell(withIdentifier: "newTableCellCustom") as! newTableCellCustom
             cell.label1login.text = userData[indexPath.row].login
-            
+            newlogin = userData[indexPath.row].login
             cell.label2score.text = "Score: "+String(userData[indexPath.row].score)
             
             
@@ -76,7 +79,15 @@ class ViewController: UIViewController,UISearchBarDelegate, UITableViewDelegate,
             return cell
         }
         
-        
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        performSegue(withIdentifier: "newOne", sender: viewDetailFirst)
+    }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let destination = segue.destination as? userDetail{
+            destination.newItems = userData[tableView.indexPathForSelectedRow?.row ?? 0]
+        }
+    }
         func ParsingJson(comletion: @escaping ([Items])->()){
             print(y!)
 
