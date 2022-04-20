@@ -79,7 +79,11 @@ class ViewController: UIViewController,UISearchBarDelegate, UITableViewDelegate,
             return cell
         }
         
-
+    override func viewWillAppear(_ animated: Bool) {
+        <#code#>
+    }
+    
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         performSegue(withIdentifier: "newOne", sender: viewDetailFirst)
     }
