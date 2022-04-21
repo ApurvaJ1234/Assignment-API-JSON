@@ -75,7 +75,7 @@ class ViewController: UIViewController,UISearchBarDelegate, UITableViewDelegate,
             let image = UIImage(data: imageData)
 
             cell.imageavatar?.image = image
-            
+            cell.isHidden = indexPath.row > 20
             return cell
         }
         
