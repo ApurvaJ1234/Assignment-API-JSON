@@ -79,11 +79,7 @@ class ViewController: UIViewController,UISearchBarDelegate, UITableViewDelegate,
             return cell
         }
         
-    override func viewWillAppear(_ animated: Bool) {
-        <#code#>
-    }
-    
-    
+
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         performSegue(withIdentifier: "newOne", sender: viewDetailFirst)
     }
@@ -113,6 +109,24 @@ class ViewController: UIViewController,UISearchBarDelegate, UITableViewDelegate,
                     }
                     catch {
                         print("Parsing Error")
+                        
+                        DispatchQueue.main.async(execute: {
+                          // call any function ex. doSomething()
+                            // Create new Alert
+                            var dialogMessage = UIAlertController(title: "No results found", message: "Search Again?", preferredStyle: .alert)
+                            
+                            // Create OK button with action handler
+                            let ok = UIAlertAction(title: "Search", style: .default, handler: { (action) -> Void in
+                                print("Ok button tapped")
+                             })
+                            
+                            //Add OK button to a dialog message
+                            dialogMessage.addAction(ok)
+
+                            // Present Alert to
+                            self.present(dialogMessage, animated: true, completion: nil)
+                         })
+                        
                     }
                 }
             }
