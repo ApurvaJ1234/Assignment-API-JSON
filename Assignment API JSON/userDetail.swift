@@ -10,12 +10,12 @@ import UIKit
 class userDetail: UIViewController {
     @IBOutlet weak var userImage: UIImageView!
     @IBOutlet weak var userName: UILabel!
+    @IBOutlet weak var userId: UILabel!
+    @IBOutlet weak var nodeId: UILabel!
+    @IBOutlet weak var accURL: UILabel!
     
-    @IBOutlet weak var repoName: UILabel!
-    @IBOutlet weak var repoDesc: UILabel!
     @IBOutlet weak var repoURL: UILabel!
-    @IBOutlet weak var repoLanguage: UILabel!
-    @IBOutlet weak var repoCreatedOn: UILabel!
+    @IBOutlet weak var accType: UILabel!
     
     var newItems: Items?
 
@@ -25,35 +25,33 @@ class userDetail: UIViewController {
         
         self.userImage.layer.cornerRadius = userImage.frame.size.height/2
         
-       // userImage = URL(string:firstURL )!
+        let idnew = newItems?.id
+        userId.text = String(describing: idnew!)
+        
+        nodeId.text = newItems?.node_id
+        
+        
+        
         userName.text = newItems?.login
-       // repoName.text = newItems?.
-        //let urlme = newItems?.url
-       // repoURL.text = urlme
-       // repoLanguage = newItems?.
-       // repoCreatedOn = newItems?.\
+       
+        let urlacc = newItems?.url
+        accURL.text = (String(describing:urlacc!))
+        
+        let urlrepo = newItems?.repos_url
+        repoURL.text = (String(describing:urlrepo!))
+        
+        accType.text = newItems?.type
+        
         let imageUrl = newItems?.avatar_url
-
         let imageData = try! Data(contentsOf: imageUrl!)
-
         let image = UIImage(data: imageData)
-
         userImage.image = image
         
         
         
-        // Do any additional setup after loading the view.
+  
     }
     
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
+

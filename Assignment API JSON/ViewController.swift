@@ -113,7 +113,7 @@ class ViewController: UIViewController,UISearchBarDelegate, UITableViewDelegate,
                         DispatchQueue.main.async(execute: {
                           // call any function ex. doSomething()
                             // Create new Alert
-                            var dialogMessage = UIAlertController(title: "No results found", message: "Search Again?", preferredStyle: .alert)
+                            let dialogMessage = UIAlertController(title: "No results found", message: "Search Again?", preferredStyle: .alert)
                             
                             // Create OK button with action handler
                             let ok = UIAlertAction(title: "Search", style: .default, handler: { (action) -> Void in
@@ -145,4 +145,8 @@ class ViewController: UIViewController,UISearchBarDelegate, UITableViewDelegate,
         var login : String
         var score : Int
         var url : URL
+        var id : Int
+        var node_id : String
+        var repos_url : URL
+        var type : String
     }
