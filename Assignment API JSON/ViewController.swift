@@ -50,14 +50,17 @@ class ViewController: UIViewController,UISearchBarDelegate, UITableViewDelegate,
         }
         
         func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+            
             return userData.count
         }
-        
+    
+    
         func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
             
             
             
             let cell = tableView.dequeueReusableCell(withIdentifier: "newTableCellCustom") as! newTableCellCustom
+            
             cell.label1login.text = userData[indexPath.row].login
             newlogin = userData[indexPath.row].login
             cell.label2score.text = "Score: "+String(userData[indexPath.row].score)
@@ -75,7 +78,7 @@ class ViewController: UIViewController,UISearchBarDelegate, UITableViewDelegate,
             let image = UIImage(data: imageData)
 
             cell.imageavatar?.image = image
-            cell.isHidden = indexPath.row > 20
+            //cell.isHidden = indexPath.row > 20
             return cell
         }
         
@@ -117,7 +120,7 @@ class ViewController: UIViewController,UISearchBarDelegate, UITableViewDelegate,
                             
                             // Create OK button with action handler
                             let ok = UIAlertAction(title: "Search", style: .default, handler: { (action) -> Void in
-                                print("Ok button tapped")
+                                print("Search button tapped")
                              })
                             
                             //Add OK button to a dialog message
@@ -135,12 +138,12 @@ class ViewController: UIViewController,UISearchBarDelegate, UITableViewDelegate,
         }
     }
 
-    struct Gitapi : Decodable {
+    struct Gitapi : Codable {
         var total_count : Int
         var items : [Items]
         
     }
-    struct Items : Decodable {
+    struct Items : Codable {
         var avatar_url : URL
         var login : String
         var score : Int
