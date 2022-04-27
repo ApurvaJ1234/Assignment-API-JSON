@@ -37,6 +37,8 @@ class ViewController: UIViewController,UISearchBarDelegate, UITableViewDelegate,
         
         func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
             y = searchBar.text!
+            let dist = [Items]().distance(from:0 , to: 9)
+            print(dist)
             ParsingJson { data in
                 self.userData = data
                 
