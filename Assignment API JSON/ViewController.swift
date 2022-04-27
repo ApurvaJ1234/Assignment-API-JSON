@@ -39,6 +39,7 @@ class ViewController: UIViewController,UISearchBarDelegate, UITableViewDelegate,
             y = searchBar.text!
             ParsingJson { data in
                 self.userData = data
+                
                 DispatchQueue.main.async {
                     self.tableView.reloadData()
                 }
@@ -88,7 +89,7 @@ class ViewController: UIViewController,UISearchBarDelegate, UITableViewDelegate,
     }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let destination = segue.destination as? userDetail{
-            destination.newItems = userData[tableView.indexPathForSelectedRow?.row ?? 0]
+            destination.newItems = userData[tableView.indexPathForSelectedRow?.row ?? .zero]
         }
     }
         func ParsingJson(comletion: @escaping ([Items])->()){
@@ -107,26 +108,28 @@ class ViewController: UIViewController,UISearchBarDelegate, UITableViewDelegate,
                 if error == nil, data != nil{
                     let decoder = JSONDecoder()
                     do {
+                        
                     let ParsingData = try decoder.decode(Gitapi.self, from: data!)
                         comletion(ParsingData.items)
+                        
                     }
                     catch {
                         print("Parsing Error")
                         
                         DispatchQueue.main.async(execute: {
-                          // call any function ex. doSomething()
+                          
                             // Create new Alert
                             let dialogMessage = UIAlertController(title: "No results found", message: "Search Again?", preferredStyle: .alert)
                             
-                            // Create OK button with action handler
+                            
                             let ok = UIAlertAction(title: "Search", style: .default, handler: { (action) -> Void in
                                 print("Search button tapped")
                              })
                             
-                            //Add OK button to a dialog message
+                            
                             dialogMessage.addAction(ok)
 
-                            // Present Alert to
+                            
                             self.present(dialogMessage, animated: true, completion: nil)
                          })
                         
@@ -138,12 +141,12 @@ class ViewController: UIViewController,UISearchBarDelegate, UITableViewDelegate,
         }
     }
 
-    struct Gitapi : Codable {
+    struct Gitapi : Decodable {
         var total_count : Int
         var items : [Items]
         
     }
-    struct Items : Codable {
+    struct Items : Decodable {
         var avatar_url : URL
         var login : String
         var score : Int
