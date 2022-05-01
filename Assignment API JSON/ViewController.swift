@@ -11,10 +11,10 @@ class ViewController: UIViewController,UISearchBarDelegate, UITableViewDelegate,
     @IBOutlet weak var tableView: UITableView!
     
     @IBAction func viewDetailFirst(_ sender: Any) {
-    let det:userDetail=self.storyboard?.instantiateViewController(withIdentifier: "det") as!userDetail
+       // let det:userDetail=self.storyboard?.instantiateViewController(withIdentifier: "det") as!userDetail
 
         
-       self.navigationController?.pushViewController(det, animated: true)
+      //  self.navigationController?.pushViewController(det, animated: true)
     }
     
    var newlogin : String?
